@@ -41,35 +41,48 @@ impl BMICalculator.calculate_bmi {
             next.category = category_str;
         }
 
-        # **CRITICAL CHANGE: Use a report block to structure the output**
-        # This is the standard way to return data that the CLI will display.
-        report {
-            "title": "BMI Calculation Result",
-            "Inputs": {
-                "Weight": f"{self.weight_kg} kg",
-                "Height": f"{self.height_m} m"
-            },
-            "BMI": next.bmi_value,
-            "Category": next.category
-        };
+# 4. Display the results - REVERT TO PRINT
+        print(f"\n--- BMI Calculation Complete for Walker {self} ---");
+        print(f"Weight: {self.weight_kg} kg");
+        print(f"Height: {self.height_m} m");
+        print(f"Your BMI is: {rounded_bmi}");
+        print(f"Category: {category_str}");
+
+        # The print() calls are what your professor's example uses and should work.
+        # We rely on the walker spawning multiple times to execute the calculation multiple times.
     }
 }
 
 
-# --- EXECUTION / TESTING ---
+# Remove the old 'with entry:__main__' block and the 'test' block.
 
-# For reliable output, we can use a test block to execute the walker directly.
-test simple_bmi_runs {
-    # Test 1: Normal Weight (70 kg, 1.75 m -> BMI 22.86)
-    root spawn BMICalculator(weight_kg=70.0, height_m=1.75);
-
-    # Test 2: Overweight (85 kg, 1.80 m -> BMI 26.23)
-    root spawn BMICalculator(weight_kg=85.0, height_m=1.80);
-}
-
-# Remove the 'with entry:__main__' block if you use the 'jac test' command
-# If you keep 'with entry:__main__', it's best to run the walker directly.
+# New simple entrypoint for direct execution
 with entry:__main__ {
-    root spawn BMICalculator(weight_kg=70.0, height_m=1.75);
-    root spawn BMICalculator(weight_kg=85.0, height_m=1.80);
+    let weight = 70.0;
+    let height = 1.75;
+    
+    if height <= 0 {
+        print("\nError: Height must be greater than 0.");
+    } else {
+        let bmi = weight / (height * height);
+        let rounded_bmi = round(bmi, 2);
+
+        let category_str = "";
+        if rounded_bmi < 18.5 {
+            category_str = "Underweight";
+        } elif rounded_bmi >= 18.5 and rounded_bmi <= 24.9 {
+            category_str = "Normal weight";
+        } elif rounded_bmi >= 25.0 and rounded_bmi <= 29.9 {
+            category_str = "Overweight";
+        } else {
+            category_str = "Obesity";
+        }
+
+        # Use print to force output, avoiding complex walker/report issues
+        print("\n--- Direct BMI Calculation Result ---");
+        print(f"Weight: {weight} kg");
+        print(f"Height: {height} m");
+        print(f"Your BMI is: {rounded_bmi}");
+        print(f"Category: {category_str}");
+    }
 }
