@@ -11,6 +11,7 @@
 
 # Ignore a specific file
 secrets.env
+secrets.txt # I have put a fake password to see if changes will commit.
 
 # Ignore build artifacts in a subfolder
 build/
