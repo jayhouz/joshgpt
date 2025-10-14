@@ -50,8 +50,11 @@ impl BMICalculator.calculate_bmi {
     }
 }
 
-# Keep this simple entrypoint for direct testing with 'jac run'
+# ... (Walker and impl definitions remain the same) ...
+
 with entry:__main__ {
-    print("Main entrypoint executed. To run the walker, use 'jac enter'.");
-    print("Example: jac enter bmi_calculator.jac -e BMICalculator weight_kg:=70.0 height_m:=1.75");
+    # Example 1: This will spawn the walker
+    root spawn BMICalculator(weight_kg=70.0, height_m=1.75);
+    # Example 2: This will spawn the second walker
+    root spawn BMICalculator(weight_kg=85.0, height_m=1.80);
 }
