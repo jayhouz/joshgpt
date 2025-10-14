@@ -1,4 +1,11 @@
-"""A Simple BMI Calculator"""
+"""A Simple BMI Calculator
+
+This version had to do direct calculation within the entry block
+as no result shows with root spawn method;
+
+"""
+
+
 
 walker BMICalculator {
     has weight_kg: float;
