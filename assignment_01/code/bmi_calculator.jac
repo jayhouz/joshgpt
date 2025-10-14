@@ -60,19 +60,32 @@ impl BMICalculator.calculate_bmi {
         }
 
         # 4. Display the results
-        print("\n--- BMI Calculation Complete ---");
-        print(f"Weight: {self.weight_kg} kg");
-        print(f"Height: {self.height_m} m");
-        print(f"Your BMI is: {next.bmi_value}");
-        print(f"Category: {next.category}");
+        # Replace the 'print' statements with 'report' statements
+        
+        # We can use a single report block to output a list of results
+        report {
+            "title": "--- BMI Calculation Complete ---",
+            "Weight": f"{self.weight_kg} kg",
+            "Height": f"{self.height_m} m",
+            "Your BMI is": next.bmi_value,
+            "Category": next.category
+        };
+        
+        # Note: If you want the output to be a single string for simplicity, 
+        # you could also use:
+        # report f"""
+        # --- BMI Calculation Complete ---
+        # Weight: {self.weight_kg} kg
+        # Height: {self.height_m} m
+        # Your BMI is: {next.bmi_value}
+        # Category: {next.category}
+        # """;
     }
 }
 
 
 # --- EXECUTION ---
 
-# Will run when in CLI mode to demonstrate the calculator
-# Replace the values with your desired input (e.g., 70 for weight, 1.75 for height)
 with entry:__main__ {
     # Example 1: Normal Weight (70 kg, 1.75 m -> BMI 22.86)
     root spawn BMICalculator(weight_kg=70.0, height_m=1.75);
