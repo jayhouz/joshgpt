@@ -1,0 +1,17 @@
+# Add folder(s) or file(s) we want GIT to ignore.
+
+# You specify paths relative to the root of your repo.
+
+# Ignore the "temp" folder at the root
+/temp/
+/creds/
+
+# Ignore all .log files anywhere
+*.log
+
+# Ignore a specific file
+secrets.env
+
+# Ignore build artifacts in a subfolder
+build/
+dist/
