@@ -1,3 +1,8 @@
+"""
+Smart Walker Control
+Source: https://www.jac-lang.org/jac_book/chapter_10/#controlling-walker-behavior
+""" 
+
 node Student {
     has name: str;
     has grade_level: int;
